@@ -17,41 +17,39 @@ def splitFile(inputFile,chunkSize):
 		noOfChunks+=1
 
 #create a info.txt file for writing metadata
-	f = open('info.txt', 'w')
-	f.write(inputFile+','+'chunk,'+str(noOfChunks)+','+str(chunkSize))
-	f.close()
-
-
-
-	for block in zip(*[iter(msg)] * chunkSize):
+        i = 0
+	for block in zip(*[iter(data)] * chunkSize):
 		fn1 = "chunk%s" % i
 		f = open(fn1, 'wb')
-		f.write(block)
+		f.write(''.join(block))
 		f.close()
+                i += 1
 
-
+	f = open('info.txt', 'w')
+	f.write(inputFile+','+'chunk,'+str(i)+','+str(chunkSize))
+	f.close()
 
 #define the function to join the chunks of files into a single file
 def joinFiles(fileName,noOfChunks,chunkSize):
 
-	dataList = []
-	for i in range(0,noOfChunks,1):
-		chunkNum=i * chunkSize
-		chunkName = fileName+'%s'%chunkNum
+	data = []
+	for i in range(noOfChunks):
+		chunkNum = i
+		chunkName = fileName + '%s' %chunkNum
 		f = open(chunkName, 'rb')
-		dataList.append(f.read())
+		data.append(f.read())
 		f.close()
-	for data in dataList:
-		f2 = open(fileName, 'wb')
-		f2.write(data)
-		f2.close()
+        f2 = open('result', 'wb')
+        f2.write(''.join(data))
+        f2.close()
 
 # call the file splitting function
 
-splitFile('large_file.txt',100)
+splitFile('1.jpg',100)
 
 #call the function to join the splitted files
-#f = open('info.txt')
-#line = f.readline()
-#num = line.split("chunk,")[1].split(',')[0]
-#joinFiles('chunk',int(num),100)
+f = open('info.txt')
+line = f.readline()
+num = line.split(',')[2]
+print 'num', num, 'int', int(num)
+joinFiles('chunk',int(num),100)
