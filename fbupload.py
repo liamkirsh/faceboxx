@@ -1,14 +1,18 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-#from selenium.common.exceptions import TimeoutException
-#from selenium.webdriver.support.ui import WebDriverWait
-#from selenium.webdriver.support import expected_conditions as EC
+import re
+import requests
+import time
+from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 # launch headless PhantomJS browser pointed at facebook
 # https://stackoverflow.com/a/23872305
 
 # creates a new PhantomJS process
-driver = webdriver.PhantomJS()
+#driver = webdriver.PhantomJS()
+driver = webdriver.Firefox()
 email = "johaxworthless@gmail.com"
 pword = "sbhacks15"
 
@@ -24,7 +28,10 @@ password = form.find_element_by_name("pass")
 password.send_keys(pword)
 password.send_keys(Keys.RETURN)
 
+assert 'Facebook' in driver.title
+
 driver.get('https://www.facebook.com/messages/' + '100009014106177')
+assert 'Messages' in driver.title
 f = open('messages.txt', 'w')
 f.write(driver.page_source.encode('utf-8'))
 f.close()
@@ -34,3 +41,29 @@ tag = 'a._59hn'
 btns = driver.find_elements_by_css_selector(tag)
 for btn in btns:
 	print btn.get_attribute('href')
+
+dtsg = re.findall('fb_dtsg.+?value="([^"]+)"',driver.page_source)[0]
+input = driver.find_element_by_class_name("_3jk")
+attach = input.find_element_by_name("attachment[]")
+
+attach.send_keys('/home/liam/documents/test.txt')
+
+message = driver.find_element_by_class_name("_1rt")
+m = message.find_element_by_name("message_body")
+m.send_keys(Keys.ENTER)
+#message[0].send_keys(Keys.ENTER)
+
+#wait = WebDriverWait(driver, 10)
+#table = wait.until(EC.presence_of_element_located(By.CSS_SELECTOR, 'div._4-te'))
+
+#attach.send_keys(Keys.ENTER)
+#r = requests.post('https://www.facebook.com/ajax/bz')
+
+#driver.execute_script(\#$("js_3").click(function() {\
+#	var url = "ajax/bz";\
+#	var xhr = new XMLHttpRequest();
+#	xhr.open("POST", url, true);
+#	xhr.setRequestHeader("Content-Type", "application/x-javascript; charset=utf-8"
+	
+#	\
+#});')
