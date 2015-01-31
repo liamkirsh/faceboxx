@@ -23,18 +23,15 @@ def splitFile(inputFile,chunkSize):
 
 
 
-	chunkNames = []
-	for i in range(0, bytes+1, chunkSize):
+	for block in zip(*[iter(msg)] * chunkSize):
 		fn1 = "chunk%s" % i
-		chunkNames.append(fn1)
 		f = open(fn1, 'wb')
-		f.write(data[i:i+ chunkSize])
+		f.write(block)
 		f.close()
 
 
 
 #define the function to join the chunks of files into a single file
-
 def joinFiles(fileName,noOfChunks,chunkSize):
 
 	dataList = []
@@ -54,7 +51,7 @@ def joinFiles(fileName,noOfChunks,chunkSize):
 splitFile('large_file.txt',100)
 
 #call the function to join the splitted files
-f = open('info.txt')
-line = f.readline()
-num = line.split("chunk,")[1].split(',')[0]
-joinFiles('chunk',int(num),100)
+#f = open('info.txt')
+#line = f.readline()
+#num = line.split("chunk,")[1].split(',')[0]
+#joinFiles('chunk',int(num),100)
