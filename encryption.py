@@ -1,8 +1,10 @@
 import base64
 from Crypto.Cipher import AES
 from Crypto import Random
-key = '12345'
-
+key = 'd56PJSWRU5doKBQgcHyPBpfZhToAeL8+kJ189Fi/SKs'
+BS = 16
+pad = lambda s: s + (BS - len(s) % BS) * chr(BS - len(s) % BS) 
+unpad = lambda s : s[:-ord(s[len(s)-1:])]
 def encrypt(raw):
     raw = pad(raw)
     iv = Random.new().read( AES.block_size )
