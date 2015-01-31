@@ -42,7 +42,6 @@ btns = driver.find_elements_by_css_selector(tag)
 for btn in btns:
 	print btn.get_attribute('href')
 
-dtsg = re.findall('fb_dtsg.+?value="([^"]+)"',driver.page_source)[0]
 input = driver.find_element_by_class_name("_3jk")
 attach = input.find_element_by_name("attachment[]")
 
