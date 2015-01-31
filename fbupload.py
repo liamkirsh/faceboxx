@@ -28,4 +28,9 @@ driver.get('https://www.facebook.com/messages/' + '100009014106177')
 f = open('messages.txt', 'w')
 f.write(driver.page_source.encode('utf-8'))
 f.close()
-driver.save_screenshot('screenshot.jpg')
+#driver.save_screenshot('screenshot.jpg')
+
+tag = 'a._59hn'
+btns = driver.find_elements_by_css_selector(tag)
+for btn in btns:
+	print btn.get_attribute('href')
