@@ -32,15 +32,16 @@ def fbupload(fileDir, email, pword):
         driver.get('https://www.facebook.com/messages/' + '100009014106177')
         assert 'Messages' in driver.title
         f = open('messages.txt', 'w')
-        f.write(driver.page_source.encode('utf-8'))
+        f.write(str(driver.page_source.encode('utf-8')))
         f.close()
         #driver.save_screenshot('screenshot.jpg')
 
         tag = 'a._59hn'
         btns = driver.find_elements_by_css_selector(tag)
+        links=open('links.txt','w')
         for btn in btns:
-                print (btn.get_attribute('href'))
-
+                links.write(btn.get_attribute('href')+'\n')
+        links.close()
         input = driver.find_element_by_class_name("_3jk")
         attach = input.find_element_by_name("attachment[]")
 
@@ -65,3 +66,7 @@ def fbupload(fileDir, email, pword):
                 
         #	\
         #});')
+filedir='1.jpg'
+username="johaxworthless@gmail.com"
+password="sbhacks15"
+fbupload(filedir,username,password)
