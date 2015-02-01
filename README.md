@@ -1,2 +1,2 @@
-# facebox
-A desktop client that uses Facebook Messaging as a cloud storage service.
+# faceboxx
+Faceboxx is an open source tool that uses Facebook Messaging as a cloud storage service.
