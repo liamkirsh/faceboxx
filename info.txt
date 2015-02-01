@@ -1,1 +1,1 @@
-1.jpg,chunk,2066,100
+spim.png.zip,4,6000
