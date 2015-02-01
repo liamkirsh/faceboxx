@@ -1,10 +1,9 @@
 import wx
-import wx.lib.agw.hyperlink as hl
-import fbIO
 
 from Tkinter import *
 from tkFileDialog import askopenfilename
-
+import Tkinter as tk
+import fbIO
 
 
 
@@ -19,14 +18,36 @@ class windowClass(wx.Frame):
         Tk().withdraw()
         filename=askopenfilename()
 
-        ### REPLACE WITH UPLOAD CODE ###
+        userName = "johaxworthless@gmail.com"
+        passWord = "sbhacks15"
+        fbIO.upload(filename, userName, passWord)
         
-        ### filename is set, need to send to fbIO.py with fb credentials
+        ### filename is set, need to send to fbIO.py; with fb credentials?
         
         print(filename)
 
     def basicGUI(self):
+        
+        #splash screen
+        root = tk.Tk()
 
+        root.overrideredirect(True)
+        width = root.winfo_screenwidth()
+        height = root.winfo_screenheight()
+        root.geometry('%dx%d+%d+%d' % (width*0.5, height*0.5, width*0.1, height*0.1))
+
+        image_file = "faceboxx_logo.gif"
+
+        image = tk.PhotoImage(file=image_file)
+        canvas = tk.Canvas(root, height=height*0.8, width=width*0.8, bg="black")
+        canvas.create_image(width*0.5/2, height*0.5/2, image=image)
+        canvas.pack()
+
+        # show the splash screen for 3000 milliseconds then destroy
+        root.after(3000, root.destroy)
+        root.mainloop()
+
+        #start application
         panel = wx.Panel(self)
 
         
@@ -44,7 +65,7 @@ class windowClass(wx.Frame):
 
         ## REPLACE WITH FB LOGIN CODE ##
         
-        ### need to send userName, passWord to fbIO.py
+        ### need to send userName, passWord to fbIO.py? or just use hardcoded test user?
         
         print(userName)
         print(passWord)
@@ -60,7 +81,7 @@ class windowClass(wx.Frame):
         exitItem = wx.MenuItem(fileButton, wx.ID_EXIT, 'Exit\tCtrl+Q')
         exitItem.SetBitmap(wx.Bitmap('sad_face.png'))
         fileButton.AppendItem(exitItem)
-        #need to add way to kill process, fully close file?
+        ### need to add way to kill process, fully close file?
 
         menuBar.Append(fileButton, '&File')
 
@@ -75,7 +96,7 @@ class windowClass(wx.Frame):
 
         ## FILE HEADERS ##
         
-        ### change to be hidden until file is uploaded/split
+        ### change to be hidden until file is uploaded/split? or just don't show at all?
 
         Text1 = wx.StaticText(panel, -1, 'Filename', (10,10))
         Text1.SetForegroundColour('black')
@@ -91,21 +112,6 @@ class windowClass(wx.Frame):
 
         ## FILE LIST ##
 
-        indata = fbIO.link_name_map()
-        i = 0
-        names = indata[0]
-        link = indata[1]
-        position = [10,40]
-        for k in xrange(len(indata[0])):
-            name = 'file' + str(i)
-            name = hl.HyperLinkCtrl(panel, -1, names[i], pos= position,
-                                  URL=link[i])
-            position[1] += 30
-            i += 1
-            
-    '''
-
-
 
         self.SetFont(wx.Font(10, wx.SWISS, wx.NORMAL, wx.NORMAL, False))
 
@@ -113,7 +119,7 @@ class windowClass(wx.Frame):
         self.SetSizer(sizer)
 
         
-        ### hyperlinks to each individual file after upload
+        ### hyperlinks to each individual file after upload? or don't show, just show file after retrieve?
         
         file1 = wx.HyperlinkCtrl(self, wx.ID_ANY, 'Filename1', 'www.google.com', (10,40),
               wx.DefaultSize, wx.HL_DEFAULT_STYLE, wx.HyperlinkCtrlNameStr)
@@ -121,7 +127,6 @@ class windowClass(wx.Frame):
         
         #self.Bind(wx.EVT_HYPERLINK_LEFT, self.OnLink)
         #file1.SetColours("BLUE", "BLUE", "BLUE")
-
 
         fileNum1 = wx.StaticText(panel, -1, '5', (80,40))
         Text1.SetForegroundColour('black')
@@ -132,8 +137,8 @@ class windowClass(wx.Frame):
         dateUpload1 = wx.StaticText(panel, -1, '2015-02-01 02:24:15', (210,40))
         Text1.SetForegroundColour('black')
 
-        file2 = hl.HyperLinkCtrl(panel, -1, 'Filename2', pos=(10,70),
-                                  URL="http://www.wxpython.org/")
+        file2 = wx.HyperlinkCtrl(self, wx.ID_ANY, 'Filename2', 'www.google.com', (10,70),
+              wx.DefaultSize, wx.HL_DEFAULT_STYLE, wx.HyperlinkCtrlNameStr)
 
         fileNum2 = wx.StaticText(panel, -1, '12', (80,70))
         Text1.SetForegroundColour('black')
@@ -143,7 +148,7 @@ class windowClass(wx.Frame):
 
         dateUpload2 = wx.StaticText(panel, -1, '2015-02-01 02:26:34', (210,70))
         Text1.SetForegroundColour('black')
-    '''
+
     def Quit(self, e):
         self.Close()
 

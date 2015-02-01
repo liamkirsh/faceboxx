@@ -1,5 +1,4 @@
 import re
-
 import chunk
 import fbupload
 import os
@@ -15,7 +14,7 @@ def upload(filedir,username,password):
     
     driver = fbupload.fbupload(paths, username, password)
     print 'returned from upload'
-    urls = fbupload.fbdownload(filedir.split(os.path.sep)[-1], username, password, driver)
+    urls = fbupload.fbdownload(filedir, username, password, driver)
     print 'returned from download'
     return urls
 
@@ -33,9 +32,8 @@ def link_name_map():
     links=f.read()
     
     return [re.findall(r'\.txt\/([^?]+)\?', links),links.split('\n')]
-
+    
 filedir='textfile.txt'
-
 username="johaxworthless@gmail.com"
 password="sbhacks15"
 
@@ -49,4 +47,3 @@ for url in urls:
 
 #upload(filedir,username,password)
 #retrive(filedir,username,password)
-
