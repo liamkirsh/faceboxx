@@ -1,5 +1,5 @@
 import re
-
+'''
 import chunk
 import fbupload
 def upload(filedir,username,password):
@@ -16,13 +16,13 @@ def retrive(filename,username,password):
     fileName, noOfChunks, chunkSize = line.split(',')
     chunk.joinFiles(fileName,noOfChunks,chunkSize)
     chunk.zipdecrypt(filename,password)
-
+'''
 def link_name_map():
     f=open('links.txt')
     links=f.read()
     
     return [re.findall(r'\.txt\/([^?]+)\?', links),links.split('\n')]
-    
+'''
 filedir='1.jpg'
 username="johaxworthless@gmail.com"
 password="sbhacks15"
@@ -32,3 +32,4 @@ password="sbhacks15"
 
 #upload(filedir,username,password)
 #retrive(filedir,username,password)
+'''

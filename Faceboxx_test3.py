@@ -1,5 +1,6 @@
 import wx
 import wx.lib.agw.hyperlink as hl
+import fbIO
 
 from Tkinter import *
 from tkFileDialog import askopenfilename
@@ -78,20 +79,19 @@ class windowClass(wx.Frame):
         Text4.SetForegroundColour('#black')
 
         ## FILE LIST ##
-
-
-        self.SetFont(wx.Font(10, wx.SWISS, wx.NORMAL, wx.NORMAL, False))
-
-        sizer = wx.BoxSizer(wx.VERTICAL)
-        self.SetSizer(sizer)
-
-        file1 = hl.HyperLinkCtrl(panel, -1, 'Filename1', pos=(10,40),
-                                  URL="http://www.wxpython.org/")
-
-        #sizer.Add(file1, 0, wx.ALL, 10)
-        
-        #self.Bind(wx.EVT_HYPERLINK_LEFT, self.OnLink)
-        #file1.SetColours("BLUE", "BLUE", "BLUE")
+        indata = fbIO.link_name_map()
+        i = 0
+        names = indata[0]
+        link = indata[1]
+        position = [10,40]
+        for k in xrange(len(indata[0])):
+            name = 'file' + str(i)
+            name = hl.HyperLinkCtrl(panel, -1, names[i], pos= position,
+                                  URL=link[i])
+            position[1] += 30
+            i += 1
+            
+    '''
 
         fileNum1 = wx.StaticText(panel, -1, '5', (80,40))
         Text1.SetForegroundColour('black')
@@ -113,7 +113,7 @@ class windowClass(wx.Frame):
 
         dateUpload2 = wx.StaticText(panel, -1, '2015-02-01 02:26:34', (210,70))
         Text1.SetForegroundColour('black')
-
+    '''
     def Quit(self, e):
         self.Close()
 
