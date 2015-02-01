@@ -4,7 +4,7 @@ from Tkinter import *
 from tkFileDialog import askopenfilename
 import Tkinter as tk
 import fbIO
-
+import wx.lib.agw.hyperlink as hl
 
 
 class windowClass(wx.Frame):
@@ -111,43 +111,18 @@ class windowClass(wx.Frame):
         Text4.SetForegroundColour('#black')
 
         ## FILE LIST ##
-
-
-        self.SetFont(wx.Font(10, wx.SWISS, wx.NORMAL, wx.NORMAL, False))
-
-        sizer = wx.BoxSizer(wx.VERTICAL)
-        self.SetSizer(sizer)
-
         
-        ### hyperlinks to each individual file after upload? or don't show, just show file after retrieve?
-        
-        file1 = wx.HyperlinkCtrl(self, wx.ID_ANY, 'Filename1', 'www.google.com', (10,40),
-              wx.DefaultSize, wx.HL_DEFAULT_STYLE, wx.HyperlinkCtrlNameStr)
-        #sizer.Add(file1, 0, wx.ALL, 10)
-        
-        #self.Bind(wx.EVT_HYPERLINK_LEFT, self.OnLink)
-        #file1.SetColours("BLUE", "BLUE", "BLUE")
-
-        fileNum1 = wx.StaticText(panel, -1, '5', (80,40))
-        Text1.SetForegroundColour('black')
-
-        fileSize1 = wx.StaticText(panel, -1, '48.67', (130,40))
-        Text1.SetForegroundColour('black')
-
-        dateUpload1 = wx.StaticText(panel, -1, '2015-02-01 02:24:15', (210,40))
-        Text1.SetForegroundColour('black')
-
-        file2 = wx.HyperlinkCtrl(self, wx.ID_ANY, 'Filename2', 'www.google.com', (10,70),
-              wx.DefaultSize, wx.HL_DEFAULT_STYLE, wx.HyperlinkCtrlNameStr)
-
-        fileNum2 = wx.StaticText(panel, -1, '12', (80,70))
-        Text1.SetForegroundColour('black')
-
-        fileSize2 = wx.StaticText(panel, -1, '136.23', (130,70))
-        Text1.SetForegroundColour('black')
-
-        dateUpload2 = wx.StaticText(panel, -1, '2015-02-01 02:26:34', (210,70))
-        Text1.SetForegroundColour('black')
+        indata = fbIO.link_name_map()
+        i = 0
+        names = indata[0]
+        link = indata[0]
+        position = [10, 40]
+        for k in xrange(len(indata[0])):
+			name = 'file' + str(i)
+			name = hl.HyperLinkCtrl(panel, -1, names[i], pos=position,
+                                    URL=link[i])
+			position[1] += 30
+			i += 1
 
     def Quit(self, e):
         self.Close()
