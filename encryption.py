@@ -1,8 +1,10 @@
 import base64
 from Crypto.Cipher import AES
 from Crypto import Random
-key = 'd56PJSWRU5doKBQgcHyPBpfZhToAeL8+kJ189Fi/SKs'
-BS = 16
+import os
+
+key = os.urandom(AES.block_size*2)
+BS = AES.block_size
 pad = lambda s: s + (BS - len(s) % BS) * chr(BS - len(s) % BS) 
 unpad = lambda s : s[:-ord(s[len(s)-1:])]
 def encrypt(raw):
@@ -17,14 +19,17 @@ def decrypt(enc):
     cipher = AES.new(key, AES.MODE_CBC, iv )
     return unpad(cipher.decrypt( enc[16:] ))
 
-f= open('large_file.txt')
-plain = f.read().replace('\n', '')
+f= open('1.jpg')
+plain = f.read()
 cipher = encrypt(plain)
 
 fOut = open('encrypted','w')
 fOut.write(cipher)
+fOut.close()
 
 f= open('encrypted')
-cipher = f.read().replace('\n', '')
-decrypt(cipher)
+cipher = f.read()
+decrypted = open('decrypted', 'w')
+decrypted.write(decrypt(cipher))
+decrypted.close()
 

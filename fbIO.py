@@ -17,4 +17,4 @@ filename='1.jpg'
 username="johaxworthless@gmail.com"
 password="sbhacks15"
 upload(filename,username,password)
-retrive(filename,username,password)
+retrive('1',username,password)

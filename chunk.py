@@ -1,6 +1,23 @@
 import os
 #break a file into chunks and join them back 
 
+import pyminizip
+import sys
+from zipfile import ZipFile
+import shutil
+import os
+
+compression_level = 9
+
+#make an encrypted zip
+def zipcrypt(inputFile, output, password):
+   pyminizip.compress(inputFile, output, password, compression_level)
+   return
+
+def zipdecrypt(inputFile, password):
+	zip = ZipFile(inputFile)
+	zip.extractall(pwd=password)
+	return
 
 #define the function to split the file into smaller chunks
 def splitFile(inputFile,chunkSize):
@@ -8,8 +25,10 @@ def splitFile(inputFile,chunkSize):
 	f = open(inputFile, 'rb')
 	data = f.read()
 	f.close()
-	fileDir, ext=os.path.splitext(inputFile)
-	path, name = os.path.split(fileDir)
+
+        os.remove(inputFile)
+
+
 # get the length of data, ie size of the input file in bytes
 	bytes = len(data)
 
@@ -19,17 +38,18 @@ def splitFile(inputFile,chunkSize):
 		noOfChunks+=1
 
 #create a info.txt file for writing metadata
-	i = 0
+
+        i = 0
+        os.mkdir(inputFile)
 	for block in zip(*[iter(data)] * chunkSize):
-		fn1 = name+"_%s" % i
-		f = open(fn1, 'wb')
-		f.write(''.join([str(x) for x in block]))
-		
+		fn1 = (inputFile + "%s") % i
+		f = open(inputFile + '/' + fn1, 'wb')
+		f.write(''.join(block))
 		f.close()
 		i += 1
 
-	f = open(name+'_info.txt', 'w')
-	f.write(name+ext+','+str(i)+','+str(chunkSize))
+	f = open('info.txt', 'w')
+	
 	f.close()
 
 #define the function to join the chunks of files into a single file
@@ -39,25 +59,36 @@ def joinFiles(fileName,noOfChunks,chunkSize):
 	name,ext=os.path.splitext(fileName)
 	for i in range(noOfChunks):
 		chunkNum = i
-		
-		chunkName = name + '%s' %chunkNum
-		f = open(chunkName, 'rb')
+
+		chunkName = fileName + '%d' % chunkNum
+		f = open(fileName + '/' + chunkName, 'rb')
 		data.append(f.read())
 		f.close()
-	f2 = open(fileName, 'wb')
-	f2.write(''.join(data))
-	f2.close()
+        shutil.rmtree(fileName)
+        f2 = open(fileName, 'wb')
+        f2.write(''.join(data))
+        f2.close()
 
-'''
-# call the file splitting function
+# python chunk.py -e file password
+if (len(sys.argv) == 4 and sys.argv[1] == "-e"):
+   # make encrypted zip
+   zipcrypt(sys.argv[2], sys.argv[2] + '.zip', sys.argv[3])
 
-splitFile('1.jpg',100)
+   # call the file splitting function
 
-#call the function to join the splitted files
-f = open('info.txt')
-line = f.readline()
-num = line.split(',')[2]
-print 'num', num, 'int', int(num)
-joinFiles('chunk',int(num),100)
-f.close()
-'''
+
+   splitFile(sys.argv[2] + '.zip', 100)
+
+
+elif (len(sys.argv) == 4 and sys.argv[1] == "-d"):
+# python chunk.py -d foldername password
+   #call the function to join the splitted files
+   f = open('info.txt')
+   line = f.readline()
+   num = line.split(',')[2]
+   print 'num', num
+   joinFiles(sys.argv[2], int(num), 100)
+   zipdecrypt(sys.argv[2],  sys.argv[3])
+else:
+   print 'python chunk.py -e file password'
+   print 'python chunk.py -d foldername password'
