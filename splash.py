@@ -16,7 +16,7 @@ canvas = tk.Canvas(root, height=height*0.8, width=width*0.8, bg="black")
 canvas.create_image(width*0.5/2, height*0.5/2, image=image)
 canvas.pack()
 
-# show the splash screen for 5000 milliseconds then destroy
+# show the splash screen for 3000 milliseconds then destroy
 root.after(3000, root.destroy)
 root.mainloop()
 
