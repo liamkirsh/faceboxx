@@ -68,7 +68,7 @@ def splitFile(inputFile):
 def joinFiles(fileName, noOfChunks):
    # this function works
    data = []
-   for i in range(noOfChunks):
+   for i in range(noOfChunks): # change this to check how many pieces are in the folder
       chunkName = fileName + '/' + fileName[:-3] + str(i)
       curChunk = open(chunkName, 'rb')
       data.append(curChunk.read())

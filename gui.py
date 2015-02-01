@@ -5,6 +5,7 @@ from tkFileDialog import askopenfilename
 import Tkinter as tk
 import fbIO
 import wx.lib.agw.hyperlink as hl
+import chunk
 
 
 class windowClass(wx.Frame):
@@ -117,15 +118,28 @@ class windowClass(wx.Frame):
         names = indata[0]
         link = indata[0]
         position = [10, 40]
+        shown = []
         for k in xrange(len(indata[0])):
-			name = 'file' + str(i)
-			name = hl.HyperLinkCtrl(panel, -1, names[i], pos=position,
-                                    URL=link[i])
-			position[1] += 30
-			i += 1
+			#name = 'file' + str(i)
+			#name = hl.HyperLinkCtrl(panel, -1, names[i], pos=position,
+            #                        URL=link[i])
+            if names[i][:-1] not in shown:
+				button=wx.Button(panel, label=names[i][:-1], pos=position,size=(80,30))
+				shown += names[i][:-1]
+				i += 1
+				position[1] += 30
+				self.Bind(wx.EVT_BUTTON, self.combine, button)
 
     def Quit(self, e):
         self.Close()
+        
+	def combine(self, event):
+		# get label name
+		# iterate through links and download each file with matching name
+		# to name.zipdir/.
+		# call joinFiles(name.zipiter, number of chunks)
+		# call zipdecrypt(inputfile, password)
+		# return
 
 def main():
     app = wx.App()

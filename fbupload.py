@@ -120,5 +120,10 @@ def fbdownload(fileName, email, pword, driver=None):
 	print results[0]
 	print str(len(results)), 'matches for', fileName
 	
+        f = open('links.txt', 'a')
+        for link in results:
+            f.write(link)
+            f.write('\n')
+        f.close()
 	return sorted(results,
-			key=lambda numerical: re.search(r'\/([^?]+)\?oh=', numerical).group(1))
+			key=lambda numerical: re.search(r'\/([^?/]+)\?oh=', numerical).group(1))

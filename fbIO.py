@@ -29,10 +29,10 @@ def retrieve(filename,username,password):
     chunk.zipdecrypt(filename,password)
 
 def link_name_map():
-    f=open('links.txt')
+    f=open('links.txt', 'r')
     links=f.read()
-    
-    return [re.findall(r'\.txt\/([^?]+)\?', links),links.split('\n')]
+    f.close()
+    return [re.findall(r'\/([^?/]+)\?oh=', links),links.split('\n')]
     
 '''
 
