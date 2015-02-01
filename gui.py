@@ -3,7 +3,7 @@ import wx
 from Tkinter import *
 from tkFileDialog import askopenfilename
 import Tkinter as tk
-
+import fbIO
 
 
 
@@ -18,7 +18,9 @@ class windowClass(wx.Frame):
         Tk().withdraw()
         filename=askopenfilename()
 
-        ### REPLACE WITH UPLOAD CODE ###
+        userName = "johaxworthless@gmail.com"
+        passWord = "sbhacks15"
+        fbIO.upload(filename, userName, passWord)
         
         ### filename is set, need to send to fbIO.py; with fb credentials?
         
