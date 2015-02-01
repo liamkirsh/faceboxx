@@ -4,7 +4,7 @@ from Tkinter import *
 from tkFileDialog import askopenfilename
 import Tkinter as tk
 
-
+#import fbIO
 
 
 class windowClass(wx.Frame):
@@ -23,6 +23,8 @@ class windowClass(wx.Frame):
         ### filename is set, need to send to fbIO.py; with fb credentials?
         
         print(filename)
+        
+        #fbIO.upload(filename, userName, passWord)
 
     def basicGUI(self):
         
