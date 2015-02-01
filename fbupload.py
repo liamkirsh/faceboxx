@@ -2,6 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import re
 import time
+import os
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -51,11 +52,13 @@ def fbupload(files, email, pword):
 	#links.close()
 	
 	for fileDir in files:
-		print 'sending file dir ' + fileDir
+		print 'sending file dir ' + os.path.join(os.getcwd(),
+			fileDir.split(os.path.sep)[-2], fileDir.split(os.path.sep)[-1])
 		input = driver.find_element_by_class_name("_3jk")
 		attach = input.find_element_by_name("attachment[]")
 		time.sleep(2)
-		attach.send_keys(fileDir)
+		attach.send_keys(os.path.join(os.getcwd(),
+			fileDir.split(os.path.sep)[-2], fileDir.split(os.path.sep)[-1]))
 		time.sleep(2)
 		message = driver.find_element_by_class_name("_1rt")
 		m = message.find_element_by_name("message_body")

@@ -8,7 +8,7 @@ def upload(filedir,username,password):
     chunk.zipcrypt(filedir, filedir + '.zip', password)
     chunk.splitFile(filedir + '.zip')
     
-    chunks = os.listdir(filedir + '.zipdir')
+    chunks = os.listdir(filedir.split(os.path.sep)[-1] + '.zipdir')
     paths = [os.path.abspath(os.path.join(filedir + '.zipdir', part))\
 		for part in chunks]
     
