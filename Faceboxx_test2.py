@@ -66,6 +66,10 @@ class windowClass(wx.Frame):
         self.SetTitle('Faceboxx')
         self.Show(True)
 
+
+
+        
+
         Text1 = wx.StaticText(panel, -1, 'File1', (10,10))
         Text1.SetForegroundColour('#67cddc')
         Text1.SetBackgroundColour('black')
