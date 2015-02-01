@@ -19,7 +19,7 @@ class windowClass(wx.Frame):
 
         ### REPLACE WITH UPLOAD CODE ###
         
-        ### filename is set, need to send to fbIO.py with fb credentials
+        ### filename is set, need to send to fbIO.py; with fb credentials?
         
         print(filename)
 
@@ -42,7 +42,7 @@ class windowClass(wx.Frame):
 
         ## REPLACE WITH FB LOGIN CODE ##
         
-        ### need to send userName, passWord to fbIO.py
+        ### need to send userName, passWord to fbIO.py? or just use hardcoded test user?
         
         print(userName)
         print(passWord)
@@ -58,7 +58,7 @@ class windowClass(wx.Frame):
         exitItem = wx.MenuItem(fileButton, wx.ID_EXIT, 'Exit\tCtrl+Q')
         exitItem.SetBitmap(wx.Bitmap('sad_face.png'))
         fileButton.AppendItem(exitItem)
-        #need to add way to kill process, fully close file?
+        ### need to add way to kill process, fully close file?
 
         menuBar.Append(fileButton, '&File')
 
@@ -73,7 +73,7 @@ class windowClass(wx.Frame):
 
         ## FILE HEADERS ##
         
-        ### change to be hidden until file is uploaded/split
+        ### change to be hidden until file is uploaded/split? or just don't show at all?
 
         Text1 = wx.StaticText(panel, -1, 'Filename', (10,10))
         Text1.SetForegroundColour('black')
@@ -96,7 +96,7 @@ class windowClass(wx.Frame):
         self.SetSizer(sizer)
 
         
-        ### hyperlinks to each individual file after upload
+        ### hyperlinks to each individual file after upload? or don't show, just show file after retrieve?
         
         file1 = wx.HyperlinkCtrl(self, wx.ID_ANY, 'Filename1', 'www.google.com', (10,40),
               wx.DefaultSize, wx.HL_DEFAULT_STYLE, wx.HyperlinkCtrlNameStr)
