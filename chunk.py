@@ -26,6 +26,7 @@ def splitFile(inputFile):
    f = open(inputFile, 'r')
    data = f.read()
    f.close()
+   inputFile = inputFile.split(os.path.sep)[-1]
    #print 'original data len' + str(len(data))
    #os.remove(inputFile[:-4])
    #os.remove(inputFile)

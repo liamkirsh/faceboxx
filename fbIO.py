@@ -14,7 +14,7 @@ def upload(filedir,username,password):
     
     driver = fbupload.fbupload(paths, username, password)
     print 'returned from upload'
-    urls = fbupload.fbdownload(filedir, username, password, driver)
+    urls = fbupload.fbdownload(filedir.split(os.path.sep)[-1], username, password, driver)
     print 'returned from download'
     return urls
 
