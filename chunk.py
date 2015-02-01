@@ -46,7 +46,7 @@ def splitFile(inputFile,chunkSize):
       i += 1
 
    f = open('info.txt', 'w')
-   f.write(inputFile+','+'chunk,'+str(i)+','+str(chunkSize))
+   f.write(inputFile+','+str(i)+','+str(chunkSize))
    f.close()
 
 #define the function to join the chunks of files into a single file

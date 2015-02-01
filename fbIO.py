@@ -2,17 +2,19 @@ import chunk
 import fbupload
 def upload(filedir,username,password):
     chunkSize=100
-    chunk.splitFile(filedir,chunkSize)
+    path, fname = os.path.split(filedir)
+    chunk.zipcrypt(fname, fname + '.zip', password)
+    chunk.splitFile(filedir+'.zip',chunkSize)
     #fbupload(filedir,username,password)
 
 def retrive(filename,username,password):
     #get info.txt, files
-    f = open(filename+'_info.txt')
+    f = open('info.txt')
     line = f.readline()
     f.close()
     fileName, noOfChunks, chunkSize = line.split(',')
-    joinFiles(fileName,noOfChunks,chunkSize)
-
+    chunk.joinFiles(fileName,noOfChunks,chunkSize)
+    chunk.zipdecrypt(filename,password)
 filename='1.jpg'
 username="johaxworthless@gmail.com"
 password="sbhacks15"
