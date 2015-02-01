@@ -3,9 +3,9 @@
 import urllib2
 import os
 
-def fbdownload(url):
+def fbdownload(url,file_name):
 
-    file_name = url.split('/')[-1]
+ #   file_name = url.split('/')[-1]
     u = urllib2.urlopen(url)
     if not os.path.exists('downloads'):
         os.makedirs('downloads')
