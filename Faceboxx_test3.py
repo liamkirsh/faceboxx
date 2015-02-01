@@ -40,6 +40,7 @@ class windowClass(wx.Frame):
         print(passWord)
         ## REPLACE WITH FB LOGIN CODE ##
 
+
         button=wx.Button(panel, label='New Upload',pos=(300,150),size=(80,30))
         self.Bind(wx.EVT_BUTTON,self.upload, button)
 
@@ -83,7 +84,7 @@ class windowClass(wx.Frame):
         sizer = wx.BoxSizer(wx.VERTICAL)
         self.SetSizer(sizer)
 
-        file1 = wx.HyperlinkCtrl(self, wx.ID_ANY, 'Filename1', 'http://www.google.com', (10,40),
+        file1 = wx.HyperlinkCtrl(self, wx.ID_ANY, 'Filename1', 'www.google.com', (10,40),
               wx.DefaultSize, wx.HL_DEFAULT_STYLE, wx.HyperlinkCtrlNameStr)
         #sizer.Add(file1, 0, wx.ALL, 10)
         
@@ -120,7 +121,6 @@ def main():
 
     app.MainLoop()
 
-
-
+    
 main()
         
