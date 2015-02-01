@@ -1,4 +1,3 @@
-import os
 #break a file into chunks and join them back 
 
 import pyminizip
@@ -49,14 +48,14 @@ def splitFile(inputFile,chunkSize):
 		i += 1
 
 	f = open('info.txt', 'w')
-	
+	f.write(inputFile+','+'chunk,'+str(i)+','+str(chunkSize))
 	f.close()
 
 #define the function to join the chunks of files into a single file
 def joinFiles(fileName,noOfChunks,chunkSize):
 
 	data = []
-	name,ext=os.path.splitext(fileName)
+	
 	for i in range(noOfChunks):
 		chunkNum = i
 
