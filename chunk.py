@@ -17,13 +17,13 @@ def splitFile(inputFile,chunkSize):
 		noOfChunks+=1
 
 #create a info.txt file for writing metadata
-        i = 0
+	i = 0
 	for block in zip(*[iter(data)] * chunkSize):
 		fn1 = "chunk%s" % i
 		f = open(fn1, 'wb')
 		f.write(''.join(block))
 		f.close()
-                i += 1
+		i += 1
 
 	f = open('info.txt', 'w')
 	f.write(inputFile+','+'chunk,'+str(i)+','+str(chunkSize))
@@ -39,9 +39,9 @@ def joinFiles(fileName,noOfChunks,chunkSize):
 		f = open(chunkName, 'rb')
 		data.append(f.read())
 		f.close()
-        f2 = open('result', 'wb')
-        f2.write(''.join(data))
-        f2.close()
+	f2 = open('result', 'wb')
+	f2.write(''.join(data))
+	f2.close()
 
 # call the file splitting function
 
@@ -53,3 +53,4 @@ line = f.readline()
 num = line.split(',')[2]
 print 'num', num, 'int', int(num)
 joinFiles('chunk',int(num),100)
+f.close()
