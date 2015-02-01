@@ -1,4 +1,5 @@
 import wx
+import wx.lib.agw.hyperlink as hl
 
 from Tkinter import *
 from tkFileDialog import askopenfilename
@@ -84,8 +85,9 @@ class windowClass(wx.Frame):
         sizer = wx.BoxSizer(wx.VERTICAL)
         self.SetSizer(sizer)
 
-        file1 = wx.HyperlinkCtrl(self, wx.ID_ANY, 'Filename1', 'www.google.com', (10,40),
-              wx.DefaultSize, wx.HL_DEFAULT_STYLE, wx.HyperlinkCtrlNameStr)
+        file1 = hl.HyperLinkCtrl(panel, -1, 'Filename1', pos=(10,40),
+                                  URL="http://www.wxpython.org/")
+
         #sizer.Add(file1, 0, wx.ALL, 10)
         
         #self.Bind(wx.EVT_HYPERLINK_LEFT, self.OnLink)
@@ -100,8 +102,8 @@ class windowClass(wx.Frame):
         dateUpload1 = wx.StaticText(panel, -1, '2015-02-01 02:24:15', (210,40))
         Text1.SetForegroundColour('black')
 
-        file2 = wx.HyperlinkCtrl(self, wx.ID_ANY, 'Filename2', 'www.google.com', (10,70),
-              wx.DefaultSize, wx.HL_DEFAULT_STYLE, wx.HyperlinkCtrlNameStr)
+        file2 = hl.HyperLinkCtrl(panel, -1, 'Filename2', pos=(10,70),
+                                  URL="http://www.wxpython.org/")
 
         fileNum2 = wx.StaticText(panel, -1, '12', (80,70))
         Text1.SetForegroundColour('black')
