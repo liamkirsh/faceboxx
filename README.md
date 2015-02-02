@@ -1,5 +1,5 @@
 # faceboxx
-Faceboxx is an open source tool that uses Facebook Messaging as a cloud storage service. It currently serves as a proof of concept and uses a Facebook account that was created to test the script, and is set to break the file into 10MB chunks as per the constant specified in chunk.py.
+Faceboxx is an open-source desktop front-end that uses Facebook Messenger as a cloud storage service. It currently serves as a proof of concept using a Facebook account that was created to test the script, and is set to break the file into 10MB chunks as per the constant specified in chunk.py.
 
 To run, execute gui.py and enter a username and password when prompted. Then select the "browse" button to select a file on your computer that is greater than 10MB large. Make sure that Firefox is installed in the default location on your system and that you have a working Internet connection.
 
