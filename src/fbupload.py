@@ -70,29 +70,29 @@ def fbdownload(fileName, email, pword, driver=None):
 	# https://stackoverflow.com/a/23872305
 
 	if not driver:
-	# creates a new PhantomJS process
-		driver = webdriver.PhantomJS()
-		#driver = webdriver.Firefox()
+	    # creates a new PhantomJS process
+	    driver = webdriver.PhantomJS()
+	    #driver = webdriver.Firefox()
 		
-		# TODO: read these in from user input
-		email = "johaxworthless@gmail.com"
-		pword = "sbhacks15"
+	    driver.get('https://www.facebook.com')
+	    assert 'Facebook' in driver.title
 
-		driver.get('https://www.facebook.com')
-		assert 'Facebook' in driver.title
+	    #https://stackoverflow.com/questions/25569426/unable-to-login-to-quora-using-selenium-webdriver-in-python
+	    form = driver.find_element_by_class_name("menu_login_container")
+	    username = form.find_element_by_name("email")
+	    username.send_keys(email)
 
-		#https://stackoverflow.com/questions/25569426/unable-to-login-to-quora-using-selenium-webdriver-in-python
-		form = driver.find_element_by_class_name("menu_login_container")
-		username = form.find_element_by_name("email")
-		username.send_keys(email)
+	    password = form.find_element_by_name("pass")
+	    password.send_keys(pword)
+	    password.send_keys(Keys.RETURN)
 
-		password = form.find_element_by_name("pass")
-		password.send_keys(pword)
-		password.send_keys(Keys.RETURN)
+	    assert 'Facebook' in driver.title
 
-		assert 'Facebook' in driver.title
+            # Open a Facebook 404 page to grab the username because it loads faster
+            # than the newsfeed
+            driver.get('https://www.facebook.com/aksdjsandkjasndjknandjsakndkjsads/')
+            assert 'Page Not Found' in driver.title
 
-        if driver.current_url != 'https://www.facebook.com/messages/' + ID:
             # get user ID from profile button
             ID = (driver.find_element_by_class_name('_2dpe').get_attribute('href')
                     .split('/')[-1])
