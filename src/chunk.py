@@ -33,34 +33,43 @@ def splitFile(inputFile):
    #print 'original data len' + str(len(data))
    #os.remove(inputFile[:-4])
    #os.remove(inputFile)
+   
+   if len(data) < CHUNK_SIZE:
+	   blockfile = open(inputFile + 'dir/'
 
    #create a info.txt file for writing metadata
    i = 0
    j = 0
    os.mkdir(inputFile + 'dir')
-   while (CHUNK_SIZE * i < len(data)):
-      #print str(len(block)) + '\n'
-      #blockfile = open(inputFile + 'dir' + '/' + inputFile + str(i), 'wb')
-      blockfile = open(inputFile + 'dir' + '/' + inputFile + str(i), 'w')
-      blockfile.write(data[CHUNK_SIZE * i:CHUNK_SIZE * (i + 1)])
-      #print 'line 40 blocksize: ' + str(len(''.join(block)))
-      i += 1
-      #print 'line 42: i is ', str(i)
-      blockfile.close()
-   if (CHUNK_SIZE * i + j < len(data)):
-      #print 'overflowed!'
-      blockfile = open(inputFile + 'dir/' + inputFile + str(i), 'w') 
-      #print 'i is ' + str(i) + '\n'
-      #print 'CHUNK_SIZE is ' + str(CHUNK_SIZE)
-      #print 'j is ' + str(j)
-      #print 'len of data is ' + str(len(data))
-      #print 'so what is CHUNK_SIZE * i + j?', str(CHUNK_SIZE*i+j)
-      while (((CHUNK_SIZE * i) + j) < len(data)): 
-         #print 'overflowed a bit\n'
-         blockfile.write(data[CHUNK_SIZE * i + j])
-         j += 1
-      blockfile.close()
-   if (j > 0): i += 1
+   
+   if len(data) < CHUNK_SIZE:
+	   blockfile = open(inputFile + 'dir/' + inputFile + '0', 'w')
+	   blockfile.write(data)
+	   i += 1
+   else:
+	   while (CHUNK_SIZE * i < len(data)):
+		  #print str(len(block)) + '\n'
+		  #blockfile = open(inputFile + 'dir/' + inputFile + str(i), 'wb')
+		  blockfile = open(inputFile + 'dir/' + inputFile + str(i), 'w')
+		  blockfile.write(data[CHUNK_SIZE * i:CHUNK_SIZE * (i + 1)])
+		  #print 'line 40 blocksize: ' + str(len(''.join(block)))
+		  i += 1
+		  #print 'line 42: i is ', str(i)
+		  blockfile.close()
+	   if (CHUNK_SIZE * i + j < len(data)):
+		  #print 'overflowed!'
+		  blockfile = open(inputFile + 'dir/' + inputFile + str(i), 'w') 
+		  #print 'i is ' + str(i) + '\n'
+		  #print 'CHUNK_SIZE is ' + str(CHUNK_SIZE)
+		  #print 'j is ' + str(j)
+		  #print 'len of data is ' + str(len(data))
+		  #print 'so what is CHUNK_SIZE * i + j?', str(CHUNK_SIZE*i+j)
+		  while (((CHUNK_SIZE * i) + j) < len(data)): 
+			 #print 'overflowed a bit\n'
+			 blockfile.write(data[CHUNK_SIZE * i + j])
+			 j += 1
+		  blockfile.close()
+	   if (j > 0): i += 1
    infofile = open('info.txt', 'w')
    infofile.write(inputFile + ',' + str(i) + ',' + str(CHUNK_SIZE))
    infofile.close()
