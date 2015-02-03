@@ -58,12 +58,6 @@ class windowClass(wx.Frame):
         if getPass.ShowModal()==wx.ID_OK:
             passWord = getPass.GetValue()
 
-        ### need to send userName, passWord to fbIO.py? or just use hardcoded test user?
-        
-        #print(userName)
-        #print(passWord)
-
-
         button=wx.Button(panel, label='New Upload',pos=(300,150),size=(80,30))
         self.Bind(wx.EVT_BUTTON, 
                     lambda event: self.upload(event, userName, passWord),
@@ -75,13 +69,11 @@ class windowClass(wx.Frame):
         exitItem = wx.MenuItem(fileButton, wx.ID_EXIT, 'Exit\tCtrl+Q')
         exitItem.SetBitmap(wx.Bitmap('res/sad_face.png'))
         fileButton.AppendItem(exitItem)
-        ### need to add way to kill process, fully close file?
 
         menuBar.Append(fileButton, '&File')
 
         self.SetMenuBar(menuBar)
         self.Bind(wx.EVT_MENU, self.Quit, exitItem)
-        
       
         self.SetTitle('Faceboxx')
         self.Show(True)
