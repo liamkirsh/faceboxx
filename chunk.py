@@ -6,23 +6,26 @@ from zipfile import ZipFile
 import shutil
 import os
 
+# The compression level passed to pyminizip
 compression_level = 9
+
+# Number of bytes per chunk uploaded to Facebook
 CHUNK_SIZE = 10000000
 
-#make an encrypted zip
+# Zips inputFile under password and outputs it to output using pyminizip
 def zipcrypt(inputFile, output, password):
    pyminizip.compress(inputFile, output, password, compression_level)
    return
 
+# Uses built-in zipfile library to decrypt the zip and extract the contents to the current dir
 def zipdecrypt(inputFile, password):
    zip = ZipFile(inputFile)
    zip.extractall(pwd=password)
    return
 
-#define the function to split the file into smaller chunks
+# Split the file into smaller chunks
 def splitFile(inputFile):
    #read the contents of the file
-   #f = open(inputFile, 'rb')
    f = open(inputFile, 'r')
    data = f.read()
    f.close()
@@ -44,7 +47,6 @@ def splitFile(inputFile):
       i += 1
       #print 'line 42: i is ', str(i)
       blockfile.close()
-   #sys.exit(1)
    if (CHUNK_SIZE * i + j < len(data)):
       #print 'overflowed!'
       blockfile = open(inputFile + 'dir/' + inputFile + str(i), 'w') 
@@ -70,11 +72,11 @@ def joinFiles(fileName, noOfChunks):
    data = []
    for i in range(noOfChunks): # change this to check how many pieces are in the folder
       chunkName = fileName + '/' + fileName[:-3] + str(i)
-      curChunk = open(chunkName, 'rb')
+      curChunk = open(chunkName, 'r')
       data.append(curChunk.read())
       curChunk.close()
    shutil.rmtree(fileName) # delete folder of chunks
-   joined = open(fileName, 'wb')
+   joined = open(fileName, 'w')
    joined.write(''.join(data)) # write joined chunk file
    joined.close()
    return

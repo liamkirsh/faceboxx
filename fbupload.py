@@ -107,18 +107,16 @@ def fbdownload(fileName, email, pword, driver=None):
 	# Append all result URLs to results
 	for btn in btns:
 		urls.append(btn.get_attribute('href'))
-	
-	
-	print 'got urls:', str(len(urls))
-	print urls[0]
+
+	print 'scraped', str(len(urls)), 'urls'
+	#print urls[0]
 	print 'pursuing matches for ', fileName
-		
+
 	# If URL matches filename, keep it in results
-	results = filter(
-				lambda match: fileName in match, urls)
-				
-	print results[0]
-	print str(len(results)), 'matches for', fileName
+	results = filter(lambda match: fileName in match, urls)
+
+	#print results[0]
+	print 'scraped', str(len(results)), 'urls for', fileName
 	
         f = open('links.txt', 'a')
         for link in results:
