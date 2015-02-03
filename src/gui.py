@@ -37,7 +37,7 @@ class windowClass(wx.Frame):
         height = root.winfo_screenheight()
         root.geometry('%dx%d+%d+%d' % (width*0.5, height*0.5, width*0.1, height*0.1))
 
-        image_file = "faceboxx_logo.gif"
+        image_file = "res/faceboxx_logo.gif"
 
         image = tk.PhotoImage(file=image_file)
         canvas = tk.Canvas(root, height=height*0.8, width=width*0.8, bg="black")
@@ -80,7 +80,7 @@ class windowClass(wx.Frame):
 
         fileButton = wx.Menu()
         exitItem = wx.MenuItem(fileButton, wx.ID_EXIT, 'Exit\tCtrl+Q')
-        exitItem.SetBitmap(wx.Bitmap('sad_face.png'))
+        exitItem.SetBitmap(wx.Bitmap('res/sad_face.png'))
         fileButton.AppendItem(exitItem)
         ### need to add way to kill process, fully close file?
 
@@ -112,41 +112,40 @@ class windowClass(wx.Frame):
         Text4.SetForegroundColour('#black')
 
         ## FILE LIST ##
-        
         indata = fbIO.link_name_map()
-        i = 0
-        names = indata[0]
-        link = indata[0]
-        position = [10, 40]
-        shown = []
-        for k in xrange(len(indata[0])):
-			#name = 'file' + str(i)
-			#name = hl.HyperLinkCtrl(panel, -1, names[i], pos=position,
-            #                        URL=link[i])
+        if indata: 
+            i = 0
+            names = indata[0]
+            link = indata[0]
+            position = [10, 40]
+            shown = []
+            #for k in xrange(len(indata[0])):
+                #name = 'file' + str(i)
+                #name = hl.HyperLinkCtrl(panel, -1, names[i], pos=position,
+            # URL=link[i])
             if names[i][:-1] not in shown:
-				button=wx.Button(panel, label=names[i][:-1], pos=position,size=(80,30))
-				shown += names[i][:-1]
-				i += 1
-				position[1] += 30
-				self.Bind(wx.EVT_BUTTON, self.combine, button)
+                                button=wx.Button(panel, label=names[i][:-1], pos=position,size=(80,30))
+                                shown += names[i][:-1]
+                                i += 1
+                                position[1] += 30
+                                self.Bind(wx.EVT_BUTTON, self.combine, button)
 
     def Quit(self, e):
         self.Close()
         
-	def combine(self, event):
-		# get label name
-		# iterate through links and download each file with matching name
-		# to name.zipdir/.
-		# call joinFiles(name.zipiter, number of chunks)
-		# call zipdecrypt(inputfile, password)
-		# return
+    def combine(self, event):
+        # get label name
+        # iterate through links and download each file with matching name
+        # to name.zipdir/.
+        # call joinFiles(name.zipiter, number of chunks)
+        # call zipdecrypt(inputfile, password)
+        return
 
 def main():
     app = wx.App()
     windowClass(None)
 
     app.MainLoop()
+    return
 
-    
-main()
-        
+main() 

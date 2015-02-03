@@ -30,7 +30,7 @@ class windowClass(wx.Frame):
 
         fileButton = wx.Menu()
         exitItem = wx.MenuItem(fileButton, wx.ID_EXIT, 'Exit\tCtrl+Q')
-        exitItem.SetBitmap(wx.Bitmap('sad_face.png'))
+        exitItem.SetBitmap(wx.Bitmap('res/sad_face.png'))
         fileButton.AppendItem(exitItem)
 
         menuBar.Append(fileButton, '&File')

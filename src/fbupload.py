@@ -15,10 +15,6 @@ def fbupload(files, email, pword):
 	#driver = webdriver.PhantomJS()
 	driver = webdriver.Firefox()
 	
-	# TODO: read these in from user input
-	email = "johaxworthless@gmail.com"
-	pword = "sbhacks15"
-
 	driver.get('https://www.facebook.com')
 	assert 'Facebook' in driver.title
 
@@ -34,14 +30,14 @@ def fbupload(files, email, pword):
 
 	assert 'Facebook' in driver.title
 
+        # get user ID from profile button
+        ID = driver.find_element_by_class_name('_2dpe').get_attribute('href')
+
 	# TODO: determine user ID or username and subsitute
-	driver.get('https://www.facebook.com/messages/' + '100009014106177')
+	driver.get('https://www.facebook.com/messages/' + ID)
 	time.sleep(2)
 	assert 'Messages' in driver.title
 	time.sleep(2)
-	#f = open('messages.txt', 'w')
-	#f.write(str(driver.page_source.encode('utf-8')))
-	#f.close()
 	#driver.save_screenshot('screenshot.jpg')
 
 	#tag = 'a._59hn'
@@ -93,8 +89,10 @@ def fbdownload(fileName, email, pword, driver=None):
 
 		assert 'Facebook' in driver.title
 
+        # get user ID from profile button
+        ID = driver.find_element_by_class_name('_2dpe').get_attribute('href')
 		# TODO: determine user ID or username and subsitute
-		driver.get('https://www.facebook.com/messages/' + '100009014106177')
+		driver.get('https://www.facebook.com/messages/' + ID)
 		
 	assert 'Messages' in driver.title
 
