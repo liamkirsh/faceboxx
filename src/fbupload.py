@@ -92,7 +92,7 @@ def fbdownload(fileName, email, pword, driver=None):
 
 		assert 'Facebook' in driver.title
 
-        if driver.current_url != 'https://www.facebook.com/messages/' + ID):
+        if driver.current_url != 'https://www.facebook.com/messages/' + ID:
             # get user ID from profile button
             ID = (driver.find_element_by_class_name('_2dpe').get_attribute('href')
                     .split('/')[-1])
