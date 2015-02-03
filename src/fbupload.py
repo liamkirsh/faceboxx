@@ -28,12 +28,15 @@ def fbupload(files, email, pword):
 	password.send_keys(Keys.RETURN)
 	time.sleep(2)
 
-	assert 'Facebook' in driver.title
+        # Open a Facebook 404 page to grab the username because it loads faster
+        # than the newsfeed
+        driver.get('https://www.facebook.com/aksdjsandkjasndjknandjsakndkjsads/')
+        assert 'Page Not Found' in driver.title
 
         # get user ID from profile button
-        ID = driver.find_element_by_class_name('_2dpe').get_attribute('href')
+        ID = (driver.find_element_by_class_name('_2dpe').get_attribute('href')
+                .split('/')[-1])
 
-	# TODO: determine user ID or username and subsitute
 	driver.get('https://www.facebook.com/messages/' + ID)
 	time.sleep(2)
 	assert 'Messages' in driver.title
@@ -90,9 +93,9 @@ def fbdownload(fileName, email, pword, driver=None):
 		assert 'Facebook' in driver.title
 
         # get user ID from profile button
-        ID = driver.find_element_by_class_name('_2dpe').get_attribute('href')
-		# TODO: determine user ID or username and subsitute
-		driver.get('https://www.facebook.com/messages/' + ID)
+        ID = (driver.find_element_by_class_name('_2dpe').get_attribute('href')
+                .split('/')[-1])
+	driver.get('https://www.facebook.com/messages/' + ID)
 		
 	assert 'Messages' in driver.title
 

@@ -6,7 +6,7 @@ import Tkinter as tk
 import fbIO
 import wx.lib.agw.hyperlink as hl
 import chunk
-
+import sys
 
 class windowClass(wx.Frame):
 
@@ -15,18 +15,12 @@ class windowClass(wx.Frame):
 
         self.basicGUI()
 
-    def upload(self, event):
+    def upload(self, event, uname, pword):
         Tk().withdraw()
         filename=askopenfilename()
 
-        userName = "johaxworthless@gmail.com"
-        passWord = "sbhacks15"
-        fbIO.upload(filename, userName, passWord)
+        fbIO.upload(filename, uname, pword)
         
-        ### filename is set, need to send to fbIO.py; with fb credentials?
-        
-        print(filename)
-
     def basicGUI(self):
         
         #splash screen
@@ -64,17 +58,16 @@ class windowClass(wx.Frame):
         if getPass.ShowModal()==wx.ID_OK:
             passWord = getPass.GetValue()
 
-        ## REPLACE WITH FB LOGIN CODE ##
-        
         ### need to send userName, passWord to fbIO.py? or just use hardcoded test user?
         
-        print(userName)
-        print(passWord)
-        ## REPLACE WITH FB LOGIN CODE ##
+        #print(userName)
+        #print(passWord)
 
 
         button=wx.Button(panel, label='New Upload',pos=(300,150),size=(80,30))
-        self.Bind(wx.EVT_BUTTON,self.upload, button)
+        self.Bind(wx.EVT_BUTTON, 
+                    lambda event: self.upload(event, userName, passWord),
+                    button)
 
         menuBar = wx.MenuBar()
 
@@ -132,6 +125,7 @@ class windowClass(wx.Frame):
 
     def Quit(self, e):
         self.Close()
+        sys.exit(0)
         
     def combine(self, event):
         # get label name
