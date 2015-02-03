@@ -33,9 +33,6 @@ def splitFile(inputFile):
    #print 'original data len' + str(len(data))
    #os.remove(inputFile[:-4])
    #os.remove(inputFile)
-   
-   if len(data) < CHUNK_SIZE:
-	   blockfile = open(inputFile + 'dir/'
 
    #create a info.txt file for writing metadata
    i = 0
